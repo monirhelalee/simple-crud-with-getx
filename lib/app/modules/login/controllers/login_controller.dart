@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,6 +29,7 @@ class LoginController extends GetxController {
       loginDataModel.value = loginDataModelFromJson(response);
       debugPrint("${loginDataModel.value.idToken}");
     }, onError: (error) {
+      log("-->$error");
       ApiServiceHandler.exceptionHandler(error);
     });
   }

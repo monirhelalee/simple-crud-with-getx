@@ -21,7 +21,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "{{token}}";
+    String? token = "";
 
     _dio
         .get(endpoint,
@@ -52,7 +52,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "{{token}}";
+    String? token = "";
     debugPrint("end point $endpoint");
     _dio
         .post(endpoint,
@@ -82,7 +82,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "{{token}}";
+    String? token = "";
     _dio
         .patch(endpoint,
             data: params,
