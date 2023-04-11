@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_crud_with_getx/app/core/service/token_repo.dart';
 
 class ApiServiceHandler {
   static late Dio _dio;
@@ -9,8 +10,8 @@ class ApiServiceHandler {
   factory ApiServiceHandler() {
     BaseOptions options = BaseOptions(
       baseUrl: "https://secure-falls-43052.herokuapp.com/api/",
-      receiveTimeout: Duration(seconds: 60), //60 sec
-      connectTimeout: Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60), //60 sec
+      connectTimeout: const Duration(seconds: 60),
     ); //60 sec
     _dio = Dio(options);
     return _singleton;
@@ -21,7 +22,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "";
+    String? token = await TokenRepo().getToken();
 
     _dio
         .get(endpoint,
@@ -52,7 +53,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "";
+    String? token = await TokenRepo().getToken();
     debugPrint("end point $endpoint");
     _dio
         .post(endpoint,
@@ -82,7 +83,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "";
+    String? token = await TokenRepo().getToken();
     _dio
         .patch(endpoint,
             data: params,
@@ -111,7 +112,7 @@ class ApiServiceHandler {
     Function(dynamic data)? onSuccess,
     Function(dynamic error)? onError,
   }) async {
-    String? token = "{{token}}";
+    String? token = await TokenRepo().getToken();
     _dio
         .delete(endpoint,
             data: params,

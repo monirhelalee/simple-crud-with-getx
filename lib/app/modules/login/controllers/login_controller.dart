@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/service/api_service.dart';
+import '../../../core/service/token_repo.dart';
 import '../../../data/models/login_data_model.dart';
+import '../../../routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
@@ -14,30 +17,46 @@ class LoginController extends GetxController {
   var passwordFocus = FocusNode();
 
   final loginDataModel = LoginDataModel().obs;
+  final accessToken = "".obs;
+  final isLoading = false.obs;
+  final tokenRepo = TokenRepo();
 
-  final dio = Dio();
+  navigate() async {
+    accessToken.value = await tokenRepo.getToken() ?? "";
+    if (accessToken.value == "") {
+    } else {
+      Get.offAndToNamed(Routes.PRODUCTS);
+    }
+  }
 
   onLogin() async {
     Map<String, dynamic> body = {
-      "username": "admin",
-      "password": "admin",
+      "username": emailController.text,
+      "password": passwordController.text,
       "rememberMe": true
     };
+    isLoading.value = true;
     await ApiServiceHandler.post(
         "https://secure-falls-43052.herokuapp.com/api/authenticate", body,
-        onSuccess: (response) {
-      loginDataModel.value = loginDataModelFromJson(response);
-      debugPrint("${loginDataModel.value.idToken}");
+        onSuccess: (response) async {
+      //debugPrint(response);
+      //loginDataModel.value = loginDataModelFromJson(response.toString());
+      String token = response["id_token"];
+      await tokenRepo.setToken(token);
+      isLoading.value = false;
+      Get.offAndToNamed(Routes.PRODUCTS);
     }, onError: (error) {
+      isLoading.value = false;
       log("-->$error");
-      ApiServiceHandler.exceptionHandler(error);
+      Get.snackbar("Error!", "Something wrong, please try again.");
     });
   }
 
   final count = 0.obs;
   @override
-  void onInit() {
-    ApiServiceHandler();
+  Future<void> onInit() async {
+    await tokenRepo.getToken();
+    await navigate();
     super.onInit();
   }
 

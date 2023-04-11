@@ -1,9 +1,15 @@
 import 'package:get/get.dart';
 
-class ProductsController extends GetxController {
-  //TODO: Implement ProductsController
+import '../../../core/service/token_repo.dart';
+import '../../../routes/app_pages.dart';
 
-  final count = 0.obs;
+class ProductsController extends GetxController {
+  final tokenRepo = TokenRepo();
+  onLogOut() async {
+    await tokenRepo.setToken("");
+    Get.offAndToNamed(Routes.LOGIN);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +24,4 @@ class ProductsController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

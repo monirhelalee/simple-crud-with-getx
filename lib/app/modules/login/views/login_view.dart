@@ -59,21 +59,16 @@ class LoginView extends GetView<LoginController> {
         }
       },
     );
-    var signInButton = CommonButton(
-      buttonTitle: "SIGN IN",
-      onTap: () async {
-        if (controller.formKey.currentState!.validate()) {
-          // await authVm.signIn();
-          // Navigator.of(context).pushAndRemoveUntil(
-          //     MaterialPageRoute(
-          //         builder: (BuildContext context) => const BottomNavBar()),
-          //     (Route<dynamic> route) => false);
-          // Get.toNamed(Routes.HOME);
-          controller.onLogin();
-          //Get.offAndToNamed(Routes.HOME);
-        }
-      },
-    );
+    var signInButton = Obx(() => controller.isLoading.value
+        ? const Center(child: CircularProgressIndicator())
+        : CommonButton(
+            buttonTitle: "SIGN IN",
+            onTap: () async {
+              if (controller.formKey.currentState!.validate()) {
+                controller.onLogin();
+              }
+            },
+          ));
     var logoWidget = Icon(
       Icons.shopping_bag_outlined,
       color: AppTheme.primaryColor,
