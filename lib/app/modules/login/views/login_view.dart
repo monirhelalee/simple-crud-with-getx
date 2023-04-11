@@ -48,14 +48,11 @@ class LoginView extends GetView<LoginController> {
       validator: Validator().nullFieldValidate,
       prefixIcon: const Icon(Icons.lock_outline),
       hintText: "Password",
+      obSecure: true,
       onFieldSubmitted: (v) async {
         FocusManager.instance.primaryFocus!.unfocus();
         if (controller.formKey.currentState!.validate()) {
-          // await authVm.signIn();
-          // Navigator.of(context).pushAndRemoveUntil(
-          //     MaterialPageRoute(
-          //         builder: (BuildContext context) => const BottomNavBar()),
-          //     (Route<dynamic> route) => false);
+          await controller.onLogin();
         }
       },
     );
@@ -65,7 +62,7 @@ class LoginView extends GetView<LoginController> {
             buttonTitle: "SIGN IN",
             onTap: () async {
               if (controller.formKey.currentState!.validate()) {
-                controller.onLogin();
+                await controller.onLogin();
               }
             },
           ));

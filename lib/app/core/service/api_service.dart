@@ -33,10 +33,11 @@ class ApiServiceHandler {
               },
             ))
         .then((res) {
+      //log("success result is = ${res.data}");
       if (onSuccess != null) {
         log("success url is = $endpoint");
 
-        onSuccess(res.data);
+        onSuccess(res);
       }
     }).catchError((error) {
       if (onError != null) {

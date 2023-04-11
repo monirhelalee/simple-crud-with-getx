@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_crud_with_getx/app/core/resource/colors.dart';
@@ -5,18 +7,15 @@ import 'package:simple_crud_with_getx/app/core/resource/colors.dart';
 class ProductCardWidget extends StatelessWidget {
   final String? imageAssetPath;
   final String? productTitle;
-  final String? offerPrice;
-  final String? mainPrice;
-  final String? discount;
-  final IconData? icon;
+  final String? price;
+  final String? brandName;
+
   const ProductCardWidget(
       {Key? key,
       this.imageAssetPath,
       this.productTitle,
-      this.offerPrice,
-      this.mainPrice,
-      this.discount,
-      this.icon})
+      this.price,
+      this.brandName})
       : super(key: key);
 
   @override
@@ -39,20 +38,17 @@ class ProductCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               /// product image
-              // Image.asset(
-              //   imageAssetPath!,
-              // ),
-              Center(
-                child: Icon(
-                  icon,
-                  size: 100,
-                  color: AppTheme.primaryColor,
-                ),
+              Image.network(
+                imageAssetPath!,
+              ),
+              const SizedBox(
+                height: 10,
               ),
 
               /// product name
               Text(
-                productTitle ?? "Nike Air Max 270 React ENG",
+                productTitle ?? "---",
+                maxLines: 2,
                 style: GoogleFonts.poppins(
                   height: 1.3,
                   fontSize: 12,
@@ -63,7 +59,7 @@ class ProductCardWidget extends StatelessWidget {
 
               /// product price
               Text(
-                "Tk299.43",
+                "Tk$price",
                 style: GoogleFonts.poppins(
                   height: 1.3,
                   fontSize: 12,
@@ -74,27 +70,37 @@ class ProductCardWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  /// product actual price with line through
-                  Text(
-                    "Tk534.33",
-                    style: GoogleFonts.poppins(
-                      height: 1.3,
-                      fontSize: 12,
-                      color: Colors.grey,
-                      decoration: TextDecoration.lineThrough,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Brand: ",
+                        style: GoogleFonts.poppins(
+                          height: 1.3,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.darkBlueColor,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 60,
+                        child: Text(
+                          "$brandName",
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.poppins(
+                            height: 1.3,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppTheme.darkBlueColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-
-                  /// product discount percentage
-                  Text(
-                    "24% Off",
-                    style: GoogleFonts.poppins(
-                      height: 1.3,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Colors.red,
-                    ),
-                  ),
+                  const Icon(
+                    Icons.delete_forever,
+                    color: Colors.red,
+                    size: 18,
+                  )
                 ],
               ),
             ],
