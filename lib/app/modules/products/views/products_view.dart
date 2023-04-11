@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:simple_crud_with_getx/app/core/resource/colors.dart';
 import 'package:simple_crud_with_getx/app/modules/products/views/widgets/product_card_widget.dart';
 
 import '../../../routes/app_pages.dart';
@@ -14,16 +15,26 @@ class ProductsView extends GetView<ProductsController> {
         title: const Text('Products'),
         centerTitle: true,
         elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () async {
-              await controller.onLogOut();
-            },
-            icon: const Icon(Icons.logout),
-          )
-        ],
+        backgroundColor: AppTheme.primaryColor,
+        leading: InkWell(
+          onTap: () {
+            Get.toNamed(Routes.PROFILE);
+          },
+          child: Container(
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: AppTheme.darkBlueColor,
+                borderRadius: BorderRadius.circular(50)),
+          ),
+        ),
       ),
       body: _productsCardWidget(),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: AppTheme.primaryColor,
+          onPressed: () {
+            Get.toNamed(Routes.ADD_PRODUCT);
+          },
+          child: const Icon(Icons.add)),
     );
   }
 

@@ -9,14 +9,8 @@ import '../../../data/models/products_data_model.dart';
 import '../../../routes/app_pages.dart';
 
 class ProductsController extends GetxController {
-  final tokenRepo = TokenRepo();
   final productsList = <ProductsDataModel>[].obs;
   final isLoading = false.obs;
-
-  onLogOut() async {
-    await tokenRepo.setToken("");
-    Get.offAndToNamed(Routes.LOGIN);
-  }
 
   getProductList() async {
     isLoading.value = true;

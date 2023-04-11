@@ -53,7 +53,9 @@ class ProfileView extends GetView<ProfileController> {
   Widget _bottomNavbar() => Padding(
         padding: const EdgeInsets.all(15.0),
         child: CommonButton(
-          onTap: () {},
+          onTap: () async {
+            await controller.onLogOut();
+          },
           buttonTitle: "LOG OUT",
         ),
       );

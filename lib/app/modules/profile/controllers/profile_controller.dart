@@ -1,9 +1,16 @@
 import 'package:get/get.dart';
 
-class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+import '../../../core/service/token_repo.dart';
+import '../../../routes/app_pages.dart';
 
-  final count = 0.obs;
+class ProfileController extends GetxController {
+  final tokenRepo = TokenRepo();
+
+  onLogOut() async {
+    await tokenRepo.setToken("");
+    Get.offAllNamed(Routes.LOGIN);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +25,4 @@ class ProfileController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
