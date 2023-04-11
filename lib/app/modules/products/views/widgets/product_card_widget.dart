@@ -26,7 +26,7 @@ class ProductCardWidget extends StatelessWidget {
       child: Container(
         width: 141,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.blueGrey.shade50,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: const Color(0xffEBF0FF),
