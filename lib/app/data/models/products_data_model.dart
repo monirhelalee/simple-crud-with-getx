@@ -3,6 +3,9 @@
 //     final productsDataModel = productsDataModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'package:hive/hive.dart';
+
+part 'products_data_model.g.dart';
 
 List<ProductsDataModel> productsDataModelFromJson(String str) =>
     List<ProductsDataModel>.from(
@@ -11,6 +14,7 @@ List<ProductsDataModel> productsDataModelFromJson(String str) =>
 String productsDataModelToJson(List<ProductsDataModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+@HiveType(typeId: 10)
 class ProductsDataModel {
   ProductsDataModel({
     this.id,
@@ -24,14 +28,23 @@ class ProductsDataModel {
     this.image,
   });
 
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   String? barcode;
+  @HiveField(3)
   String? description;
+  @HiveField(4)
   Brand? subCategory;
+  @HiveField(5)
   Brand? brand;
+  @HiveField(6)
   Quantity? quantity;
+  @HiveField(7)
   ProductPrice? productPrice;
+  @HiveField(8)
   String? image;
 
   factory ProductsDataModel.fromJson(Map<String, dynamic> json) =>
@@ -66,6 +79,7 @@ class ProductsDataModel {
       };
 }
 
+@HiveType(typeId: 11)
 class Brand {
   Brand({
     this.id,
@@ -74,11 +88,15 @@ class Brand {
     this.image,
     this.category,
   });
-
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   String? description;
+  @HiveField(3)
   String? image;
+  @HiveField(4)
   Brand? category;
 
   factory Brand.fromJson(Map<String, dynamic> json) => Brand(
@@ -99,6 +117,7 @@ class Brand {
       };
 }
 
+@HiveType(typeId: 12)
 class ProductPrice {
   ProductPrice({
     this.id,
@@ -107,9 +126,13 @@ class ProductPrice {
     this.mrp,
   });
 
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? price;
+  @HiveField(2)
   String? unitPrice;
+  @HiveField(3)
   String? mrp;
 
   factory ProductPrice.fromJson(Map<String, dynamic> json) => ProductPrice(
@@ -127,6 +150,7 @@ class ProductPrice {
       };
 }
 
+@HiveType(typeId: 13)
 class Quantity {
   Quantity({
     this.id,
@@ -135,11 +159,15 @@ class Quantity {
     this.unitValue,
     this.pastQuantity,
   });
-
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? quantity;
+  @HiveField(2)
   String? unit;
+  @HiveField(3)
   String? unitValue;
+  @HiveField(4)
   String? pastQuantity;
 
   factory Quantity.fromJson(Map<String, dynamic> json) => Quantity(
