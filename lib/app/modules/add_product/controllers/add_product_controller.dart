@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:simple_crud_with_getx/app/modules/products/controllers/products_controller.dart';
 
 import '../../../core/service/api_service.dart';
 import '../../../routes/app_pages.dart';
@@ -40,6 +41,7 @@ class AddProductController extends GetxController {
         "https://secure-falls-43052.herokuapp.com/api/create-products", body,
         onSuccess: (response) async {
       isLoading.value = false;
+      await Get.find<ProductsController>().getProductList();
       Get.offAndToNamed(Routes.PRODUCTS);
     }, onError: (error) {
       isLoading.value = false;

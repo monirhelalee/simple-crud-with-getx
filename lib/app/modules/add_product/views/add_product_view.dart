@@ -82,15 +82,16 @@ class AddProductView extends GetView<AddProductController> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: controller.isLoading.value
-            ? const Center(child: CircularProgressIndicator())
+        child: Obx(() => controller.isLoading.value
+            ? const SizedBox(
+                height: 60, child: Center(child: CircularProgressIndicator()))
             : CommonButton(
                 onTap: () async {
                   if (controller.formKey.currentState!.validate()) {
                     await controller.onSaveProduct();
                   }
                 },
-                buttonTitle: "ADD PRODUCT"),
+                buttonTitle: "ADD PRODUCT")),
       ),
     );
   }
