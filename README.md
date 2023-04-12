@@ -1,16 +1,30 @@
 # simple_crud_with_getx
 
-A new Flutter project.
+## Project Environment:
+```
+=> Flutter (Channel stable, 3.7.10)
+=> Android Studio (version 2021.3)
+=> Dart SDK version: 2.19.6 (stable) 
+```
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Feature List
+```
+├── Login
+├── Prodct List
+├── product details
+├── Delete Product
+├── Add Product
+├── Profile
+└── Log out
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Used Package:
+```
+1. Get
+2. dio
+3. google_fonts
+4. hive
+5. shared preferences
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
