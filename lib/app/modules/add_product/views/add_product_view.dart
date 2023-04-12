@@ -15,29 +15,34 @@ class AddProductView extends GetView<AddProductController> {
       validator: Validator().nullFieldValidate,
       hintText: "Product Name",
       labelText: "Product Name",
+      controller: controller.productNameController,
     );
     var descriptionWidget = CommonTextField(
       validator: Validator().nullFieldValidate,
       hintText: "Description",
       labelText: "Description",
+      controller: controller.descriptionController,
     );
     var priceWidget = CommonTextField(
       validator: Validator().nullFieldValidate,
       hintText: "Product Price",
       labelText: "Product Price",
       keyboardType: TextInputType.number,
+      controller: controller.productPriceController,
     );
     var unitPriceWidget = CommonTextField(
       validator: Validator().nullFieldValidate,
       hintText: "Unit Price",
       labelText: "Unit Price",
       keyboardType: TextInputType.number,
+      controller: controller.unitPriceController,
     );
     var mrpPriceWidget = CommonTextField(
       validator: Validator().nullFieldValidate,
       hintText: "MRP Price",
       labelText: "MRP Price",
       keyboardType: TextInputType.number,
+      controller: controller.mrpPriceController,
     );
     return Scaffold(
       appBar: AppBar(
@@ -77,7 +82,11 @@ class AddProductView extends GetView<AddProductController> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: CommonButton(onTap: () {}, buttonTitle: "ADD PRODUCT"),
+        child: CommonButton(
+            onTap: () {
+              if (controller.formKey.currentState!.validate()) {}
+            },
+            buttonTitle: "ADD PRODUCT"),
       ),
     );
   }
