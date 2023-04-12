@@ -27,15 +27,13 @@ class ProductsController extends GetxController {
   }
 
   deleteProduct({String? productId}) async {
-    isLoading.value = true;
-    await ApiServiceHandler.get(
+    Map<String, dynamic> body = {};
+    await ApiServiceHandler.delete(
         "https://secure-falls-43052.herokuapp.com/api/products/$productId",
-        onSuccess: (response) async {
+        body, onSuccess: (response) async {
       await getProductList();
       Get.snackbar("Delete!", "Delete successfully.");
-      isLoading.value = false;
     }, onError: (error) {
-      isLoading.value = false;
       Get.snackbar("Error!", "Something wrong, please try again.");
     });
   }
