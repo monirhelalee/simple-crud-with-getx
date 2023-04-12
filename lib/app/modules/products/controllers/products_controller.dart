@@ -29,7 +29,8 @@ class ProductsController extends GetxController {
         isLoading.value = false;
       }, onError: (error) async {
         if (exists) {
-          productsList.value = await hiveService.getBoxes("ProductsDataList");
+          productsList.value = await hiveService
+              .getBoxes<List<ProductsDataModel>>("ProductsDataList");
           debugPrint("product from offline ->${productsList.value.length}");
         }
         isLoading.value = false;
@@ -39,7 +40,8 @@ class ProductsController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       if (exists) {
-        productsList.value = await hiveService.getBoxes("ProductsDataList");
+        productsList.value = await hiveService
+            .getBoxes<List<ProductsDataModel>>("ProductsDataList");
         debugPrint("product from offline ->${productsList.value.length}");
       }
     }

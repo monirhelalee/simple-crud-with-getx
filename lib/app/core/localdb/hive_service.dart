@@ -35,6 +35,6 @@ class HiveService {
   getBoxes<T>(String boxName) async {
     final openBox = await Hive.openBox<T>(boxName);
     // debugPrint("box data ${openBox.values}");
-    return openBox.values.cast();
+    return openBox.values.cast<T>;
   }
 }
