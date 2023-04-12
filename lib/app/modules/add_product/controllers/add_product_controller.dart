@@ -15,7 +15,7 @@ class AddProductController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final isLoading = false.obs;
 
-  onLogin() async {
+  onSaveProduct() async {
     Map<String, dynamic> body = {
       "name": productNameController.text,
       "barcode": "string",
