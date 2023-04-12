@@ -24,31 +24,41 @@ class ProfileView extends GetView<ProfileController> {
         backgroundColor: AppTheme.primaryColor,
       );
 
-  Widget _body() => SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            _profilePicture(),
-            _profileInfo(
-              title: "Email",
-              icon: Icons.email_outlined,
-              data: "monir@gmail.com",
-            ),
-            _profileInfo(
-              title: "Phone",
-              icon: Icons.phone_android_outlined,
-              data: "+01786416417",
-            ),
-            _profileInfo(
-              title: "Phone",
-              icon: Icons.phone_android_outlined,
-              data: "+01786416417",
-            ),
-          ],
-        ),
-      );
+  Widget _body() => Obx(() => controller.isLoading.value
+      ? const Center(child: CircularProgressIndicator())
+      : SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              _profilePicture(controller.profileData.value.imageUrl ?? ""),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "${controller.profileData.value.firstName ?? ""} ${controller.profileData.value.lastName ?? ""}",
+                style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.darkBlueColor),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              _profileInfo(
+                title: "Email",
+                icon: Icons.email_outlined,
+                data: controller.profileData.value.email ?? "",
+              ),
+              _profileInfo(
+                title: "Phone",
+                icon: Icons.phone_android_outlined,
+                data: controller.profileData.value.phone ?? "",
+              ),
+            ],
+          ),
+        ));
 
   Widget _bottomNavbar() => Padding(
         padding: const EdgeInsets.all(15.0),
@@ -60,17 +70,21 @@ class ProfileView extends GetView<ProfileController> {
         ),
       );
 
-  Widget _profilePicture() => Center(
+  Widget _profilePicture(String imageUrl) => Center(
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppTheme.primaryColor,
             borderRadius: BorderRadius.circular(100),
           ),
-          child: Icon(
-            Icons.person_2_outlined,
-            color: Colors.white,
-            size: 100,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Image.network(
+              imageUrl,
+              height: 100,
+              width: 100,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       );

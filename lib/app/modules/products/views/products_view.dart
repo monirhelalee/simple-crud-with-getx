@@ -21,10 +21,11 @@ class ProductsView extends GetView<ProductsController> {
             Get.toNamed(Routes.PROFILE);
           },
           child: Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: AppTheme.darkBlueColor,
                 borderRadius: BorderRadius.circular(50)),
+            child: const Icon(Icons.person_2_outlined),
           ),
         ),
       ),
