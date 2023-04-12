@@ -55,8 +55,6 @@ class ProductsView extends GetView<ProductsController> {
                 shrinkWrap: true,
                 itemCount: controller.productsList.length ?? 0,
                 itemBuilder: (context, index) {
-                  debugPrint(
-                      "image link ${controller.productsList[index].brand?.image}");
                   return InkWell(
                     onTap: () {
                       Get.toNamed(Routes.PRODUCT_DETAILS, arguments: {
