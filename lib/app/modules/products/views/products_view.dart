@@ -68,6 +68,10 @@ class ProductsView extends GetView<ProductsController> {
                       productTitle: controller.productsList[index].name,
                       price: controller.productsList[index].productPrice?.price,
                       brandName: controller.productsList[index].brand?.name,
+                      onTap: () async {
+                        await controller.deleteProduct(
+                            productId: controller.productsList[index].id);
+                      },
                     ),
                   );
                 }),

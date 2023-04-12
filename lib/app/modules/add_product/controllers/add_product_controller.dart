@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddProductController extends GetxController {
-  //TODO: Implement AddProductController
+  final formKey = GlobalKey<FormState>();
 
   final count = 0.obs;
   @override

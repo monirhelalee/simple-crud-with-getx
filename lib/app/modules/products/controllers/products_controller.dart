@@ -4,9 +4,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 
 import '../../../core/service/api_service.dart';
-import '../../../core/service/token_repo.dart';
 import '../../../data/models/products_data_model.dart';
-import '../../../routes/app_pages.dart';
 
 class ProductsController extends GetxController {
   final productsList = <ProductsDataModel>[].obs;
@@ -24,6 +22,20 @@ class ProductsController extends GetxController {
     }, onError: (error) {
       isLoading.value = false;
       log("-->$error");
+      Get.snackbar("Error!", "Something wrong, please try again.");
+    });
+  }
+
+  deleteProduct({String? productId}) async {
+    isLoading.value = true;
+    await ApiServiceHandler.get(
+        "https://secure-falls-43052.herokuapp.com/api/products/$productId",
+        onSuccess: (response) async {
+      await getProductList();
+      Get.snackbar("Delete!", "Delete successfully.");
+      isLoading.value = false;
+    }, onError: (error) {
+      isLoading.value = false;
       Get.snackbar("Error!", "Something wrong, please try again.");
     });
   }

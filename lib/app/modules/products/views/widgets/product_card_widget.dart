@@ -1,22 +1,25 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_crud_with_getx/app/core/resource/colors.dart';
 
-class ProductCardWidget extends StatelessWidget {
+import '../../controllers/products_controller.dart';
+
+class ProductCardWidget extends GetView<ProductsController> {
   final String? imageAssetPath;
   final String? productTitle;
   final String? price;
   final String? brandName;
+  final VoidCallback? onTap;
 
-  const ProductCardWidget(
-      {Key? key,
-      this.imageAssetPath,
-      this.productTitle,
-      this.price,
-      this.brandName})
-      : super(key: key);
+  const ProductCardWidget({
+    Key? key,
+    this.imageAssetPath,
+    this.productTitle,
+    this.price,
+    this.brandName,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,10 +99,13 @@ class ProductCardWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Icon(
-                    Icons.delete_forever,
-                    color: Colors.red,
-                    size: 18,
+                  InkWell(
+                    onTap: onTap,
+                    child: const Icon(
+                      Icons.delete_forever,
+                      color: Colors.red,
+                      size: 18,
+                    ),
                   )
                 ],
               ),
