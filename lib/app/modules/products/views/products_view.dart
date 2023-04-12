@@ -59,8 +59,9 @@ class ProductsView extends GetView<ProductsController> {
                       "image link ${controller.productsList[index].brand?.image}");
                   return InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.PRODUCT_DETAILS,
-                          arguments: {"Product": "test"});
+                      Get.toNamed(Routes.PRODUCT_DETAILS, arguments: {
+                        "Product": controller.productsList[index]
+                      });
                     },
                     child: ProductCardWidget(
                       imageAssetPath:
