@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -79,11 +80,23 @@ class ProfileView extends GetView<ProfileController> {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(100),
-            child: Image.network(
-              imageUrl,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl ?? "",
               height: 100,
               width: 100,
               fit: BoxFit.cover,
+              placeholder: (context, url) => const Center(
+                child: Icon(
+                  Icons.image,
+                  size: 100,
+                ),
+              ),
+              errorWidget: (context, url, error) => const Center(
+                child: Icon(
+                  Icons.image,
+                  size: 100,
+                ),
+              ),
             ),
           ),
         ),

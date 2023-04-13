@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_crud_with_getx/app/core/resource/colors.dart';
@@ -41,8 +43,20 @@ class ProductCardWidget extends GetView<ProductsController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               /// product image
-              Image.network(
-                imageAssetPath!,
+              CachedNetworkImage(
+                imageUrl: imageAssetPath ?? "",
+                placeholder: (context, url) => const Center(
+                  child: Icon(
+                    Icons.image,
+                    size: 100,
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Center(
+                  child: Icon(
+                    Icons.image,
+                    size: 100,
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 10,

@@ -16,6 +16,7 @@
 ├── Delete Product
 ├── Add Product
 ├── Profile
+├── caching with hive
 └── Log out
 ```
 
@@ -26,5 +27,6 @@
 3. google_fonts
 4. hive
 5. shared preferences
+6. cached network image
 ```
 

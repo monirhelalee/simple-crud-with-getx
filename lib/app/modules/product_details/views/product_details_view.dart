@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/resource/colors.dart';
 import '../controllers/product_details_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({Key? key}) : super(key: key);
@@ -25,10 +26,18 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Image.network(
-                      controller.product.value.brand?.image ?? "",
-                      height: Get.width / 2,
+                    child: CachedNetworkImage(
+                      imageUrl: controller.product.value.brand?.image ?? "",
+                      placeholder: (context, url) =>
+                          Icon(Icons.image, size: Get.width),
+                      errorWidget: (context, url, error) =>
+                          Icon(Icons.image, size: Get.width),
                     ),
+
+                    // Image.network(
+                    //   controller.product.value.brand?.image ?? "",
+                    //   height: Get.width / 2,
+                    // ),
                   ),
                   const SizedBox(
                     height: 10,
